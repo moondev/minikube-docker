@@ -11,4 +11,4 @@ docker rm minikube
 
 docker build -t chadmoon/minikube:latest .
 
-docker run -it --privileged --name minikube -v /sys/fs/cgroup:/sys/fs/cgroup:ro chadmoon/minikube:latest bash
+docker run --privileged --name minikube -v /sys/fs/cgroup:/sys/fs/cgroup:ro chadmoon/minikube:latest
