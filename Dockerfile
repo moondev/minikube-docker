@@ -1,4 +1,20 @@
-FROM centos/systemd
+#FROM centos:7
+FROM centos:7
+
+
+# ENV container docker
+# RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+# systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+# rm -f /lib/systemd/system/multi-user.target.wants/*;\
+# rm -f /etc/systemd/system/*.wants/*;\
+# rm -f /lib/systemd/system/local-fs.target.wants/*; \
+# rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+# rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+# rm -f /lib/systemd/system/basic.target.wants/*;\
+# rm -f /lib/systemd/system/anaconda.target.wants/*;
+#VOLUME [ "/sys/fs/cgroup" ]
+
+
 
 #RUN apt-get update; apt-get install -y curl
 
@@ -20,6 +36,10 @@ RUN chmod u-w /etc/sudoers
 
 RUN yum -y install openssh-server openssh-clients
 
-ENV CHANGE_MINIKUBE_NONE_USER true
+ENV CHANGE_MINIKUBE_NONE_USER root
 
-CMD ["minikube", "start", "--vm-driver=none", "--use-vendored-driver"]
+COPY start.sh /start.sh
+
+#CMD ["/start.sh"]
+
+CMD ["/usr/sbin/init"]
